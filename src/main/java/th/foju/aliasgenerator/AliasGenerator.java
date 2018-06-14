@@ -20,7 +20,8 @@ public class AliasGenerator {
     return injector.getInstance(AliasGenerator.class);
   }
 
-  public String aliasFor(String key) {
-    return namePool.nameFor(new HashBasedKey(key));
+  public String aliasFor(String keyString) {
+    Key key = new HashBasedKey(keyString);
+    return namePool.nameFor(key).text();
   }
 }

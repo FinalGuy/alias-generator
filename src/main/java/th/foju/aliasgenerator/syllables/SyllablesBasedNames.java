@@ -2,6 +2,7 @@ package th.foju.aliasgenerator.syllables;
 
 import com.google.inject.Inject;
 import th.foju.aliasgenerator.Key;
+import th.foju.aliasgenerator.Name;
 import th.foju.aliasgenerator.NamePool;
 
 public class SyllablesBasedNames implements NamePool {
@@ -14,19 +15,22 @@ public class SyllablesBasedNames implements NamePool {
   }
 
   @Override
-  public String nameFor(Key key) {
-    return createPre(key) + createMid(key) + createSur(key);
+  public Name nameFor(Key key) {
+    Syllable pre = createPre(key);
+    Syllable mid = createMid(key, pre);
+    Syllable sur = createSur(key, mid);
+    return new NameFromSyllables(pre, mid, sur);
   }
 
-  private String createSur(Key key) {
-    return syllables.surFor(key).pure();
+  private Syllable createPre(Key key) {
+    return syllables.preFor(key);
   }
 
-  private String createMid(Key key) {
-    return syllables.midFor(key).pure();
+  private Syllable createMid(Key key, Syllable pre) {
+    return syllables.midFor(key);
   }
 
-  private String createPre(Key key) {
-    return syllables.preFor(key).pure();
+  private Syllable createSur(Key key, Syllable mid) {
+    return syllables.surFor(key);
   }
 }

@@ -26,7 +26,7 @@ public class AliasGeneratorTest {
   @Test
   public void shouldCreateAliasUsingNamePool() {
     String key = "key";
-    given(namePool.nameFor(any(Key.class))).willReturn("name");
+    given(namePool.nameFor(any(Key.class))).willReturn(() -> "name");
     String alias = cut.aliasFor(key);
     assertEquals(alias, "name");
   }

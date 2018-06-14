@@ -1,5 +1,7 @@
 package th.foju.aliasgenerator;
 
 public interface NamePool {
-  String nameFor(Key key);
+
+  Name nameFor(Key key);
+
 }
