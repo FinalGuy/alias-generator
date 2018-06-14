@@ -10,15 +10,15 @@ import th.foju.aliasgenerator.Key;
 
 class FileBasedSyllables implements Syllables {
 
-  private final List<String> preSyllables;
-  private final List<String> midSyllables;
-  private final List<String> surSyllables;
+  private final List<Syllable> preSyllables;
+  private final List<Syllable> midSyllables;
+  private final List<Syllable> surSyllables;
 
   public FileBasedSyllables() {
     this.preSyllables = new ArrayList<>();
     this.midSyllables = new ArrayList<>();
     this.surSyllables = new ArrayList<>();
-    InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("./fantasy.txt");
+    InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("./goblin.txt");
     BufferedReader bufRead = new BufferedReader(new InputStreamReader(resourceAsStream));
     try {
       initSyllables(bufRead);
@@ -33,11 +33,11 @@ class FileBasedSyllables implements Syllables {
       line = bufRead.readLine();
       if (line != null && !line.equals("")) {
         if (line.startsWith("-")) {
-          preSyllables.add(line.substring(1).toLowerCase());
+          preSyllables.add(new Syllable(line.substring(1).toLowerCase()));
         } else if (line.startsWith("+")) {
-          surSyllables.add(line.substring(1).toLowerCase());
+          surSyllables.add(new Syllable(line.substring(1).toLowerCase()));
         } else {
-          midSyllables.add(line.toLowerCase());
+          midSyllables.add(new Syllable(line.toLowerCase()));
         }
       }
     }
@@ -45,17 +45,21 @@ class FileBasedSyllables implements Syllables {
   }
 
   @Override
-  public String preFor(Key key) {
-    return "PRE";
+  public Syllable preFor(Key key) {
+    return syllableFor(key, preSyllables);
   }
 
   @Override
-  public String midFor(Key key) {
-    return "MID";
+  public Syllable midFor(Key key) {
+    return syllableFor(key, midSyllables);
   }
 
   @Override
-  public String surFor(Key key) {
-    return "SUR";
+  public Syllable surFor(Key key) {
+    return syllableFor(key, surSyllables);
+  }
+
+  private Syllable syllableFor(Key key, List<Syllable> syllables) {
+    return syllables.get((int) (key.nextRandom() * syllables.size()));
   }
 }

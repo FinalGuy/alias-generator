@@ -4,12 +4,12 @@ import com.google.inject.Inject;
 import th.foju.aliasgenerator.Key;
 import th.foju.aliasgenerator.NamePool;
 
-public class SyllablesBasedNamePool implements NamePool {
+public class SyllablesBasedNames implements NamePool {
 
   private final Syllables syllables;
 
   @Inject
-  public SyllablesBasedNamePool(Syllables syllables) {
+  public SyllablesBasedNames(Syllables syllables) {
     this.syllables = syllables;
   }
 
@@ -19,14 +19,14 @@ public class SyllablesBasedNamePool implements NamePool {
   }
 
   private String createSur(Key key) {
-    return syllables.surFor(key);
+    return syllables.surFor(key).pure();
   }
 
   private String createMid(Key key) {
-    return syllables.midFor(key);
+    return syllables.midFor(key).pure();
   }
 
   private String createPre(Key key) {
-    return syllables.preFor(key);
+    return syllables.preFor(key).pure();
   }
 }

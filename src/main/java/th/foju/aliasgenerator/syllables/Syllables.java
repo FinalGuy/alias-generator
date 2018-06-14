@@ -4,10 +4,10 @@ import th.foju.aliasgenerator.Key;
 
 public interface Syllables {
 
-  String preFor(Key key);
+  Syllable preFor(Key key);
 
-  String midFor(Key key);
+  Syllable midFor(Key key);
 
-  String surFor(Key key);
+  Syllable surFor(Key key);
 
 }

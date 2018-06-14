@@ -17,7 +17,11 @@ public class AliasGeneratorIntegrationTest {
 
   @Test
   public void sollNamenErzeugen() {
-    String key = "my String";
+    testCreationWithKey("my String");
+    testCreationWithKey("my other String");
+  }
+
+  private void testCreationWithKey(String key) {
     String firstAlias = cut.aliasFor(key);
     String secondAlias = cut.aliasFor(key);
     assertNotEquals(key, firstAlias);
