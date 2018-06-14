@@ -2,6 +2,7 @@ package th.foju.aliasgenerator;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.any;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +26,7 @@ public class AliasGeneratorTest {
   @Test
   public void shouldCreateAliasUsingNamePool() {
     String key = "key";
-    given(namePool.nameFor(key)).willReturn("name");
+    given(namePool.nameFor(any(Key.class))).willReturn("name");
     String alias = cut.aliasFor(key);
     assertEquals(alias, "name");
   }

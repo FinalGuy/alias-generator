@@ -1,4 +1,4 @@
-package th.foju.aliasgenerator;
+package th.foju.aliasgenerator.syllables;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import th.foju.aliasgenerator.Key;
 
 class FileBasedSyllables implements Syllables {
 

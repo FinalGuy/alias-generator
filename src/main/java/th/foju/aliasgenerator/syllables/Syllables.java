@@ -1,4 +1,6 @@
-package th.foju.aliasgenerator;
+package th.foju.aliasgenerator.syllables;
+
+import th.foju.aliasgenerator.Key;
 
 public interface Syllables {
 

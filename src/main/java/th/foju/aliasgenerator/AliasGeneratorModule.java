@@ -1,6 +1,7 @@
 package th.foju.aliasgenerator;
 
 import com.google.inject.AbstractModule;
+import th.foju.aliasgenerator.syllables.SyllablesBasedNamePool;
 
 class AliasGeneratorModule extends AbstractModule {
 
@@ -8,8 +9,6 @@ class AliasGeneratorModule extends AbstractModule {
   protected void configure() {
 
     bind(NamePool.class).to(SyllablesBasedNamePool.class);
-
-    bind(Syllables.class).to(FileBasedSyllables.class);
 
   }
 }

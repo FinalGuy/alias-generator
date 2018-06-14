@@ -4,6 +4,7 @@ package th.foju.aliasgenerator;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import th.foju.aliasgenerator.syllables.SyllableModule;
 
 public class AliasGenerator {
 
@@ -15,11 +16,11 @@ public class AliasGenerator {
   }
 
   public static AliasGenerator newInstance() {
-    Injector injector = Guice.createInjector(new AliasGeneratorModule());
+    Injector injector = Guice.createInjector(new AliasGeneratorModule(), new SyllableModule());
     return injector.getInstance(AliasGenerator.class);
   }
 
   public String aliasFor(String key) {
-    return namePool.nameFor(key);
+    return namePool.nameFor(new HashBasedKey(key));
   }
 }
