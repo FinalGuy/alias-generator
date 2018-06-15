@@ -145,42 +145,6 @@ public class NameGenerator {
         if (vocalLast(pureSyl(pre.get(a)))) last = 1;
         else last = 2;
 
-        if (syls > 2) {
-            if (expectsVocal(pre.get(a))) {
-                expecting = 1;
-                if (containsVocFirst(mid) == false)
-                    throw new RuntimeException("Expecting \"middle\" part starting with vocal, " +
-                            "but there is none. You should add one, or remove requirement for one.. ");
-            }
-            if (expectsConsonant(pre.get(a))) {
-                expecting = 2;
-                if (containsConsFirst(mid) == false)
-                    throw new RuntimeException("Expecting \"middle\" part starting with consonant, " +
-                            "but there is none. You should add one, or remove requirement for one.. ");
-            }
-        } else {
-            if (expectsVocal(pre.get(a))) {
-                expecting = 1;
-                if (containsVocFirst(sur) == false)
-                    throw new RuntimeException("Expecting \"suffix\" part starting with vocal, " +
-                            "but there is none. You should add one, or remove requirement for one.. ");
-            }
-            if (expectsConsonant(pre.get(a))) {
-                expecting = 2;
-                if (containsConsFirst(sur) == false)
-                    throw new RuntimeException("Expecting \"suffix\" part starting with consonant, " +
-                            "but there is none. You should add one, or remove requirement for one.. ");
-            }
-        }
-        if (vocalLast(pureSyl(pre.get(a))) && allowVocs(mid) == false)
-            throw new RuntimeException("Expecting \"middle\" part that allows last character of prefix to be a vocal, " +
-                    "but there is none. You should add one, or remove requirements that cannot be fulfilled.. the prefix used, was : \"" + pre.get(a) + "\", which" +
-                    "means there should be a part available, that has \"-v\" requirement or no requirements for previous syllables at all.");
-
-        if (consonantLast(pureSyl(pre.get(a))) && allowCons(mid) == false)
-            throw new RuntimeException("Expecting \"middle\" part that allows last character of prefix to be a consonant, " +
-                    "but there is none. You should add one, or remove requirements that cannot be fulfilled.. the prefix used, was : \"" + pre.get(a) + "\", which" +
-                    "means there should be a part available, that has \"-c\" requirement or no requirements for previous syllables at all.");
 
         int b[] = new int[syls];
         for (int i = 0; i < b.length - 2; i++) {
@@ -188,7 +152,6 @@ public class NameGenerator {
             random.nextDouble();
             do {
                 b[i] = (int) (Math.random() * mid.size());
-                //System.out.println("exp " +expecting+" vocalF:"+vocalFirst(mid.get(b[i]))+" syl: "+mid.get(b[i]));
             }
             while (expecting == 1 && vocalFirst(pureSyl(mid.get(b[i]))) == false || expecting == 2 && consonantFirst(pureSyl(mid.get(b[i]))) == false
                     || last == 1 && hatesPreviousVocals(mid.get(b[i])) || last == 2 && hatesPreviousConsonants(mid.get(b[i])));
