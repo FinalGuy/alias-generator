@@ -16,7 +16,7 @@ public class NameFromSyllables implements Name {
     return Arrays.stream(syllables)
       .map(Syllable::pure)
       .reduce((a, b) -> a + b)
-      .map(s -> firstCharacterUpperCase(s))
+      .map(this::firstCharacterUpperCase)
       .orElse("");
   }
 

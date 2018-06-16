@@ -18,7 +18,7 @@ class FileBasedSyllables implements Syllables {
     this.preSyllables = new ArrayList<>();
     this.midSyllables = new ArrayList<>();
     this.surSyllables = new ArrayList<>();
-    InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("./goblin.txt");
+    InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("./elven.txt");
     BufferedReader bufRead = new BufferedReader(new InputStreamReader(resourceAsStream));
     try {
       initSyllables(bufRead);
