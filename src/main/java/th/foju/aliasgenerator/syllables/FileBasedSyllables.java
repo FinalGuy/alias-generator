@@ -23,7 +23,7 @@ class FileBasedSyllables implements Syllables {
     try {
       initSyllables(bufRead);
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new RuntimeException(e);
     }
   }
 
