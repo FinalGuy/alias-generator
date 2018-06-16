@@ -1,14 +1,10 @@
 package th.foju.aliasgenerator.syllables;
 
-import static org.junit.Assert.*;
-import static th.foju.aliasgenerator.syllables.ExpectationForFollower.STARTS_WITH_CONSONANT;
-import static th.foju.aliasgenerator.syllables.ExpectationForFollower.NONE;
-import static th.foju.aliasgenerator.syllables.ExpectationForFollower.STARTS_WITH_VOCAL;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 public class SyllableTest {
-
 
   Syllable cut;
 
@@ -20,15 +16,34 @@ public class SyllableTest {
   }
 
   @Test
-  public void shouldTellItsExpectationForTheFollowingSyllable() {
-    testExpectationForFollowingSyllable("-ansr +v", STARTS_WITH_VOCAL);
-    testExpectationForFollowingSyllable("-ansr +c", STARTS_WITH_CONSONANT);
-    testExpectationForFollowingSyllable("-ansr", NONE);
+  public void shouldTellWhetherItAcceptsAGivenFollower() {
+    // Successor starts with vocal
+    testAcceptsFollower("-ansr +c", "ean", false);
+    testAcceptsFollower("-ansr +v", "ean", true);
+    // successor strart with consonant
+    testAcceptsFollower("-ansr +v", "nim", false);
+    testAcceptsFollower("-ansr +c", "nim", true);
+    // current syllable contains data about predecessor und successor
+    testAcceptsFollower("que -v +c", "nim", true);
   }
 
-  private void testExpectationForFollowingSyllable(String pureSyllable, ExpectationForFollower expected) {
-    cut = new Syllable(pureSyllable);
-    ExpectationForFollower result = cut.expectationForFollowingSyllable();
-    assertEquals(expected, result);
+  private void testAcceptsFollower(String current, String follower, boolean expectation) {
+    assertEquals(expectation, !new Syllable(current).doesNotAcceptAsNext(new Syllable(follower)));
   }
+
+  @Test
+  public void shouldTellWhetherItAcceptsAGivenPredecessor() {
+    // Predecessor ends with consonant
+    testAcceptsPredecessor("ean -v", "-ansr", false);
+    testAcceptsPredecessor("ean -c", "-ansr", true);
+    // Predecessor ends with vocal
+    testAcceptsPredecessor("ean -v", "-ama", true);
+    testAcceptsPredecessor("ean -c", "-ama", false);
+  }
+
+  private void testAcceptsPredecessor(String current, String pre, boolean expectation) {
+    assertEquals(expectation, !new Syllable(current).doesNotAcceptAsPrevious(new Syllable(pre)));
+  }
+
+
 }

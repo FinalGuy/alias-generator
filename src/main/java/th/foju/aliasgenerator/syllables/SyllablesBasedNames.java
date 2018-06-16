@@ -28,13 +28,17 @@ public class SyllablesBasedNames implements NamePool {
 
   private Syllable createMid(Key key, Syllable pre) {
     Syllable mid = syllables.midFor(key);
-    while (pre.doesNotAcceptAsFollower(mid) || mid.doesNotAcceptAsPredecessor(pre)) {
+    while (pre.doesNotAcceptAsNext(mid) || mid.doesNotAcceptAsPrevious(pre)) {
       mid = syllables.midFor(key);
     }
     return mid;
   }
 
   private Syllable createSur(Key key, Syllable mid) {
-    return syllables.surFor(key);
+    Syllable sur = syllables.surFor(key);
+    while (mid.doesNotAcceptAsNext(sur) || sur.doesNotAcceptAsPrevious(mid)) {
+      sur = syllables.surFor(key);
+    }
+    return sur;
   }
 }

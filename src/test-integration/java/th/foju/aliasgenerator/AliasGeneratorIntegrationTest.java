@@ -17,8 +17,9 @@ public class AliasGeneratorIntegrationTest {
 
   @Test
   public void sollNamenErzeugen() {
-    testCreationWithKey("my String");
-    testCreationWithKey("my other String");
+    testCreationWithKey("My String");
+    testCreationWithKey("My other String");
+    testCreationWithKey("Yet another String");
   }
 
   private void testCreationWithKey(String key) {

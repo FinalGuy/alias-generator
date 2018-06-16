@@ -1,23 +1,9 @@
 package th.foju.aliasgenerator.syllables;
 
-public enum ExpectationForFollower {
 
-  NONE {
-    @Override
-    boolean accepts(Syllable follower) {
-      return true;
-    }
-  }, STARTS_WITH_VOCAL {
-    @Override
-    boolean accepts(Syllable follower) {
-      return false;
-    }
-  }, STARTS_WITH_CONSONANT {
-    @Override
-    boolean accepts(Syllable follower) {
-      return false;
-    }
-  };
+@FunctionalInterface
+public interface ExpectationForFollower {
 
-  abstract boolean accepts(Syllable follower);
+  boolean acceptsNext(Syllable follower);
+
 }
