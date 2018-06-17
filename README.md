@@ -1,8 +1,5 @@
 [![Build Status](https://travis-ci.org/FinalGuy/alias-generator.svg?branch=master)](https://travis-ci.org/FinalGuy/alias-generator)
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/FinalGuy/alias-generator)
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](hhttps://codeclimate.com/github/FinalGuy/alias-generator)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1384afb8356ab0a9d69d/maintainability)](https://codeclimate.com/github/FinalGuy/alias-generator/maintainability)
 
 # alias-generator
 
