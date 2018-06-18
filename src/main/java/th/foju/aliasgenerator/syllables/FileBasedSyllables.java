@@ -10,15 +10,18 @@ import th.foju.aliasgenerator.Key;
 
 public class FileBasedSyllables implements Syllables {
 
-  private final List<Syllable> preSyllables;
-  private final List<Syllable> midSyllables;
-  private final List<Syllable> surSyllables;
+  private final List<Syllable> preSyllables = new ArrayList<>();
+  private final List<Syllable> midSyllables = new ArrayList<>();
+  private final List<Syllable> surSyllables = new ArrayList<>();
 
-  public FileBasedSyllables() {
-    this.preSyllables = new ArrayList<>();
-    this.midSyllables = new ArrayList<>();
-    this.surSyllables = new ArrayList<>();
-    InputStream resourceAsStream = this.getClass().getResourceAsStream("/elven.txt");
+  public FileBasedSyllables(SyllableFile... syllableFiles) {
+    for (SyllableFile syllableFile : syllableFiles) {
+      readFrom(syllableFile);
+    }
+  }
+
+  private void readFrom(SyllableFile file) {
+    InputStream resourceAsStream = this.getClass().getResourceAsStream(file.resourceName());
     BufferedReader bufRead = new BufferedReader(new InputStreamReader(resourceAsStream));
     try {
       initSyllables(bufRead);
@@ -31,17 +34,21 @@ public class FileBasedSyllables implements Syllables {
     String line = "";
     while (line != null) {
       line = bufRead.readLine();
-      if (line != null && !line.equals("")) {
-        if (line.startsWith("-")) {
-          preSyllables.add(new Syllable(line.substring(1).toLowerCase()));
-        } else if (line.startsWith("+")) {
-          surSyllables.add(new Syllable(line.substring(1).toLowerCase()));
-        } else {
-          midSyllables.add(new Syllable(line.toLowerCase()));
-        }
-      }
+      readToMemory(line);
     }
     bufRead.close();
+  }
+
+  private void readToMemory(String line) {
+    if (line != null && !line.equals("")) {
+      if (line.startsWith("-")) {
+        preSyllables.add(new Syllable(line.substring(1).toLowerCase()));
+      } else if (line.startsWith("+")) {
+        surSyllables.add(new Syllable(line.substring(1).toLowerCase()));
+      } else {
+        midSyllables.add(new Syllable(line.toLowerCase()));
+      }
+    }
   }
 
   @Override
