@@ -12,15 +12,15 @@ Based on [this post](http://forum.codecall.net/topic/49665-java-random-name-gene
 Kept the logic for concatenation of syllables, but refactored the imperative code into OOP code.
 
 ## Usage
-You simply obtain an instance of class `AliasGenerator` and call it's public method like this: 
+You just have to instantiate an `AliasGeneratorConfig` and obtain an instance of class `AliasGenerator`. After that 
+you can start by calling it's public method like this: 
 
 ```
-AliasGenerator generator = AliasGenerator.newInstance();
+AliasGeneratorConfig config = new AliasGeneratorConfig();
+AliasGenerator generator = config.newInstance();
 String alias = generator.aliasFor("my Key string");
 
 ```
 
-For performance reasons i suggest keeping a single instance of the generator because of some I/O operations happening
-during initialization.
  
  
