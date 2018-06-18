@@ -9,7 +9,7 @@ public class AliasGenerator {
   }
 
   public String aliasFor(String keyString) {
-    Key key = new HashBasedKey(keyString);
+    Key key = new HashCodeBasedKey(keyString);
     return namePool.nameFor(key).text();
   }
 }

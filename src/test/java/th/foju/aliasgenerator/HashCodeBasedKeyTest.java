@@ -1,29 +1,30 @@
 package th.foju.aliasgenerator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
-public class HashBasedKeyTest {
+public class HashCodeBasedKeyTest {
 
-  HashBasedKey cut;
+  HashCodeBasedKey cut;
 
   @Test
   public void shouldGenerateRandoms() {
-    cut = new HashBasedKey("myKey");
+    cut = new HashCodeBasedKey("myKey");
     assertNotEquals(cut.nextRandom(), cut.nextRandom(), 0.0000d);
     assertNotEquals(cut.nextRandom(), cut.nextRandom(), 0.0000d);
     assertNotEquals(cut.nextRandom(), cut.nextRandom(), 0.0000d);
-    cut = new HashBasedKey("anotherKey");
-    cut = new HashBasedKey("anotherKey!");
+    cut = new HashCodeBasedKey("anotherKey");
+    cut = new HashCodeBasedKey("anotherKey!");
   }
 
   @Test
   public void shouldGenerateSameRandomsForSameKeyString() {
-    cut = new HashBasedKey("myKey");
+    cut = new HashCodeBasedKey("myKey");
     double random1 = cut.nextRandom();
     double random2 = cut.nextRandom();
-    cut = new HashBasedKey("myKey");
+    cut = new HashCodeBasedKey("myKey");
     assertEquals(random1, cut.nextRandom(), 0.0000d);
     assertEquals(random2, cut.nextRandom(), 0.0000d);
   }
