@@ -1,5 +1,6 @@
 package th.foju.aliasgenerator.syllables;
 
+import java.util.function.Function;
 import th.foju.aliasgenerator.Key;
 import th.foju.aliasgenerator.Name;
 import th.foju.aliasgenerator.NamePool;
@@ -25,18 +26,18 @@ public class SyllablesBasedNames implements NamePool {
   }
 
   private Syllable createMid(Key key, Syllable pre) {
-    Syllable mid = syllables.midFor(key);
-    while (pre.doesNotAcceptAsNext(mid) || mid.doesNotAcceptAsPrevious(pre)) {
-      mid = syllables.midFor(key);
-    }
-    return mid;
+    return findMatchingNextFor(pre, key, syllables::midFor);
   }
 
   private Syllable createSur(Key key, Syllable mid) {
-    Syllable sur = syllables.surFor(key);
-    while (mid.doesNotAcceptAsNext(sur) || sur.doesNotAcceptAsPrevious(mid)) {
-      sur = syllables.surFor(key);
+    return findMatchingNextFor(mid, key, syllables::surFor);
+  }
+
+  private Syllable findMatchingNextFor(Syllable current, Key key, Function<Key, Syllable> fetchCandidate) {
+    Syllable candidate = fetchCandidate.apply(key);
+    while (current.doesNotAcceptAsNext(candidate) || candidate.doesNotAcceptAsPrevious(current)) {
+      candidate = fetchCandidate.apply(key);
     }
-    return sur;
+    return candidate;
   }
 }

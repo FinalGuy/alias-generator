@@ -3,7 +3,11 @@ package th.foju.aliasgenerator.syllables;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+@ToString
+@EqualsAndHashCode
 class Syllable {
 
   private static final List<Character> VOCALS = Arrays.asList('a', 'e', 'i', 'o', 'u', 'ä', 'ö', 'õ', 'ü', 'y');

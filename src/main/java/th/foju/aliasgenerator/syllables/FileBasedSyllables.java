@@ -34,21 +34,9 @@ public class FileBasedSyllables implements Syllables {
     String line = "";
     while (line != null) {
       line = bufRead.readLine();
-      readToMemory(line);
+      new Line(line).putSyllableIntoMatchingBucket(preSyllables, midSyllables, surSyllables);
     }
     bufRead.close();
-  }
-
-  private void readToMemory(String line) {
-    if (line != null && !line.equals("")) {
-      if (line.startsWith("-")) {
-        preSyllables.add(new Syllable(line.substring(1).toLowerCase()));
-      } else if (line.startsWith("+")) {
-        surSyllables.add(new Syllable(line.substring(1).toLowerCase()));
-      } else {
-        midSyllables.add(new Syllable(line.toLowerCase()));
-      }
-    }
   }
 
   @Override
