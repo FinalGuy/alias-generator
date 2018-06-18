@@ -12,7 +12,7 @@ public class AliasGeneratorIntegrationTest {
 
   @Before
   public void setUp() {
-    cut = AliasGenerator.newInstance();
+    cut = new AliasGeneratorConfig().newInstance();
   }
 
   @Test

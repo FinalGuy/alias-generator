@@ -1,6 +1,5 @@
 package th.foju.aliasgenerator.syllables;
 
-import com.google.inject.Inject;
 import th.foju.aliasgenerator.Key;
 import th.foju.aliasgenerator.Name;
 import th.foju.aliasgenerator.NamePool;
@@ -9,7 +8,6 @@ public class SyllablesBasedNames implements NamePool {
 
   private final Syllables syllables;
 
-  @Inject
   public SyllablesBasedNames(Syllables syllables) {
     this.syllables = syllables;
   }

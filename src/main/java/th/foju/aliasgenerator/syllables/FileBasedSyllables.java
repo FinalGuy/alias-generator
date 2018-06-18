@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import th.foju.aliasgenerator.Key;
 
-class FileBasedSyllables implements Syllables {
+public class FileBasedSyllables implements Syllables {
 
   private final List<Syllable> preSyllables;
   private final List<Syllable> midSyllables;
@@ -18,7 +18,7 @@ class FileBasedSyllables implements Syllables {
     this.preSyllables = new ArrayList<>();
     this.midSyllables = new ArrayList<>();
     this.surSyllables = new ArrayList<>();
-    InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("./elven.txt");
+    InputStream resourceAsStream = this.getClass().getResourceAsStream("/elven.txt");
     BufferedReader bufRead = new BufferedReader(new InputStreamReader(resourceAsStream));
     try {
       initSyllables(bufRead);
